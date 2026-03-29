@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+@theme {
+  --color-nexus-amber: #f59e0b;
+  --color-nexus-ink: #0a0a0b;
+  --color-nexus-panel: #121214;
+  --color-nexus-border: #27272a;
+  --color-nexus-muted: #a1a1aa;
+}
+
+:root {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --accent: #f59e0b;
+  --accent-dim: rgba(245, 158, 11, 0.15);
+  --panel: #121214;
+  --border: #27272a;
+  --muted: #71717a;
+}
+
+body {
+  font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-heading {
+  font-family: var(--font-syne), var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(245, 158, 11, 0.35);
+  color: #fff;
+}
+
+/* Subtle paper grain */
+.newsroom-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+.glow-amber {
+  box-shadow: 0 0 80px -20px rgba(245, 158, 11, 0.35);
+}
+
+.input-newsroom {
+  @apply w-full rounded-lg border border-zinc-800 bg-zinc-950/80 px-4 py-2.5 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-600;
+}
+
+.input-newsroom:focus {
+  border-color: rgba(245, 158, 11, 0.55);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-lg bg-[#f59e0b] px-4 py-2.5 text-sm font-semibold text-zinc-950 transition hover:bg-amber-400 active:scale-[0.99];
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center rounded-lg border border-zinc-800 bg-transparent px-4 py-2.5 text-sm text-zinc-200 transition hover:border-amber-500/40 hover:text-amber-400;
+}
+
+.card-news {
+  @apply rounded-xl border border-zinc-800/90 bg-zinc-950/50 backdrop-blur-sm transition hover:border-amber-500/25;
+}
+
+@keyframes nova-fab-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(245, 158, 11, 0.5),
+      0 0 28px rgba(245, 158, 11, 0.45);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow:
+      0 0 0 16px rgba(245, 158, 11, 0),
+      0 0 44px rgba(245, 158, 11, 0.65);
+    transform: scale(1.04);
+  }
+}
+
+.nova-fab-pulse {
+  animation: nova-fab-pulse 2.2s ease-in-out infinite;
+}
+
+.nova-fab-glow {
+  box-shadow:
+    0 0 22px rgba(245, 158, 11, 0.75),
+    0 0 56px rgba(245, 158, 11, 0.35);
+}
+
+.nova-glass-panel {
+  background: rgba(12, 12, 14, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(245, 158, 11, 0.18);
+}
+
+.nova-processing-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.14);
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  overflow: hidden;
+}
+
+.nova-processing-bar-fill {
+  height: 100%;
+  width: 18%;
+  background: linear-gradient(
+    90deg,
+    rgba(245, 158, 11, 0.25),
+    rgba(245, 158, 11, 0.95)
+  );
+  animation: nova-progress 2s ease-in-out forwards;
+}
+
+@keyframes nova-progress {
+  0% {
+    transform: translateX(-6%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.confetti-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -14px;
+  border-radius: 2px;
+  opacity: 0.95;
+  animation-name: nova-confetti-fall;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes nova-confetti-fall {
+  0% {
+    top: -14px;
+  }
+  100% {
+    top: 560px;
+    opacity: 0;
+  }
+}
