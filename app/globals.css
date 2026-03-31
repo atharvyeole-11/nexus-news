@@ -9,6 +9,7 @@
 }
 
 :root {
+  /* DARK MODE (default) */
   --color-bg: #0F0F0F;
   --color-surface: #1A1A1A;
   --color-border: #2A2A2A;
@@ -22,6 +23,9 @@
   --color-green: #00C853;
   --color-orange: #FF6D00;
   --color-pink: #EC407A;
+  --color-card-bg: #1A1A1A;
+  --color-navbar: #0F0F0F;
+  --color-input-bg: #2A2A2A;
   
   --background: #0F0F0F;
   --foreground: #fafafa;
@@ -32,9 +36,38 @@
   --muted: #A0A0A0;
 }
 
+/* LIGHT MODE */
+[data-theme='light'] {
+  --color-bg: #F5F5F5;
+  --color-surface: #FFFFFF;
+  --color-border: #E0E0E0;
+  --color-accent: #C8102E;
+  --color-text: #111111;
+  --color-muted: #666666;
+  --color-gold: #B8860B;
+  --color-blue: #1A73E8;
+  --color-teal: #00BFA5;
+  --color-purple: #7C4DFF;
+  --color-green: #00C853;
+  --color-orange: #FF6D00;
+  --color-pink: #EC407A;
+  --color-card-bg: #FFFFFF;
+  --color-navbar: #FFFFFF;
+  --color-input-bg: #F0F0F0;
+  
+  --background: #F5F5F5;
+  --foreground: #111111;
+  --accent: #C8102E;
+  --accent-dim: rgba(200, 16, 46, 0.15);
+  --panel: #FFFFFF;
+  --border: #E0E0E0;
+  --muted: #666666;
+}
+
 body {
   font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
   perspective: 1000px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .font-heading {
@@ -221,6 +254,17 @@ body {
     animation: none !important; 
     transition: none !important; 
   }
+}
+
+/* Theme toggle animation */
+@keyframes iconSwap {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(0); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.theme-toggle-icon {
+  animation: iconSwap 0.4s ease;
 }
 
 .btn-primary {

@@ -1,21 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Newspaper, LogOut, LayoutDashboard, LogIn, Play } from "lucide-react";
+import { createClient } from "@/lib/supabase";
+import { LANGUAGES, tFor, getStoredLanguage, setStoredLanguage } from "@/lib/translations";
 import {
-  LANGUAGES,
-  getStoredLanguage,
-  setStoredLanguage,
-  tFor,
-} from "@/lib/translations";
+  Newspaper,
+  Play,
+  LayoutDashboard,
+  LogOut,
+  LogIn,
+  Sun,
+  Moon,
+} from "lucide-react";
+import { useTheme } from "@/lib/ThemeContext";
+import { supabase } from "@/lib/supabase";
 
 export function Navbar() {
   const [user, setUser] = useState(null);
   const [language, setLanguage] = useState(() => getStoredLanguage());
   const router = useRouter();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user: u } }) => setUser(u));
@@ -88,6 +94,25 @@ export function Navbar() {
               <Play className="h-4 w-4" />
               <span className="hidden sm:inline">Shorts</span>
             </Link>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className={`
+                nav-link inline-flex items-center justify-center w-10 h-10 rounded-full transition-all
+                ${theme === "dark" 
+                  ? "bg-[#2A2A2A] text-white hover:bg-[#3A3A3A]" 
+                  : "bg-[#F0F0F0] text-yellow-500 hover:bg-[#E0E0E0]"
+                }
+              `}
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? (
+                <Moon className="h-5 w-5 theme-toggle-icon" />
+              ) : (
+                <Sun className="h-5 w-5 theme-toggle-icon" />
+              )}
+            </button>
 
             <select
               value={language}

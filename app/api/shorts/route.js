@@ -20,7 +20,8 @@ let cache = {
 function getYouTubeApiKey() {
   const apiKey = process.env.YOUTUBE_API_KEY;
   if (!apiKey) {
-    throw new Error("YOUTUBE_API_KEY environment variable is not set");
+    console.warn("YOUTUBE_API_KEY environment variable is not set");
+    return null;
   }
   return apiKey;
 }
@@ -96,6 +97,12 @@ function parseDuration(duration) {
 
 export async function GET() {
   try {
+    // Check if YouTube API key is available
+    if (!process.env.YOUTUBE_API_KEY) {
+      console.warn("YouTube API key not found, returning empty shorts array");
+      return NextResponse.json({ shorts: [] });
+    }
+
     // Check cache
     const now = Date.now();
     if (cache.data && (now - cache.timestamp) < CACHE_DURATION) {
@@ -103,6 +110,10 @@ export async function GET() {
     }
 
     const apiKey = getYouTubeApiKey();
+    if (!apiKey) {
+      return NextResponse.json({ shorts: [] });
+    }
+
     let allShorts = [];
 
     // Fetch shorts from each channel
@@ -146,9 +157,7 @@ export async function GET() {
       });
     }
 
-    return NextResponse.json(
-      { error: "Failed to fetch shorts", message: error.message },
-      { status: 500 }
-    );
+    // Return empty array to prevent crashes
+    return NextResponse.json({ shorts: [] });
   }
 }

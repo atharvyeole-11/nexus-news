@@ -17,7 +17,7 @@ export function BottomNav() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-      <div className="flex items-center justify-around bg-[#0F0F0F] border-t border-[#2A2A2A]">
+      <div className="flex items-center justify-around bg-[var(--color-navbar)] border-t border-[var(--color-border)]">
         {tabs.map((tab) => {
           const isActive = pathname === tab.href;
           const Icon = tab.icon;
@@ -29,10 +29,10 @@ export function BottomNav() {
               className={`
                 flex flex-col items-center justify-center py-2 px-3 min-w-0 transition-colors
                 ${tab.isCenter 
-                  ? "relative -top-2 bg-[#C8102E] rounded-full p-3 mx-2" 
+                  ? "relative -top-2 bg-[var(--color-accent)] rounded-full p-3 mx-2" 
                   : isActive 
-                    ? "text-[#C8102E]" 
-                    : "text-[#707070] hover:text-[#FFFFFF]"
+                    ? "text-[var(--color-accent)]" 
+                    : "text-[#707070] hover:text-[var(--color-text)]"
                 }
               `}
             >

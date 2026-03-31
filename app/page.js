@@ -6,10 +6,10 @@ import { ArrowRight, TrendingUp, Calendar, Plus, Play, Radio } from "lucide-reac
 
 export default function HomePage() {
   return (
-    <div className="newsroom-grain min-h-[calc(100vh-3.5rem)] bg-[#0F0F0F]">
-      <section className="relative overflow-hidden border-b border-[#2A2A2A]">
-        <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-[#C8102E]/10 blur-[120px]" />
-        <div className="pointer-events-none absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-[#E8C84A]/5 blur-[100px]" />
+    <div className="newsroom-grain min-h-[calc(100vh-3.5rem)] bg-[var(--color-bg)]">
+      <section className="relative overflow-hidden border-b border-[var(--color-border)]">
+        <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-[var(--color-accent)]/10 blur-[120px]" />
+        <div className="pointer-events-none absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-[var(--color-gold)]/5 blur-[100px]" />
 
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
           <motion.div
@@ -18,15 +18,15 @@ export default function HomePage() {
             transition={{ duration: 0.5 }}
             className="page-content max-w-3xl"
           >
-            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#C8102E]/25 bg-[#C8102E]/10 px-3 py-1 text-xs font-medium uppercase tracking-wider text-[#C8102E]">
+            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-accent)]/25 bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-medium uppercase tracking-wider text-[var(--color-accent)]">
               <Radio className="h-3.5 w-3.5" />
               Live desk
             </p>
-            <h1 className="font-heading text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl">
+            <h1 className="font-heading text-4xl font-bold leading-[1.1] tracking-tight text-[var(--color-text)] sm:text-5xl md:text-6xl">
               The newsroom,{" "}
-              <span className="text-[#C8102E]">rebuilt for focus</span>
+              <span className="text-[var(--color-accent)]">rebuilt for focus</span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-[#A0A0A0]">
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-[var(--color-muted)]">
               Nexus News pulls top headlines from trusted sources, layers Nova AI for
               quick context, and keeps your reading profile in one dark, distraction-free
               space.
@@ -46,10 +46,10 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="text-center mb-12 page-content">
-          <h2 className="text-3xl font-bold text-white mb-4">
+          <h2 className="text-3xl font-bold text-[var(--color-text)] mb-4">
             Today&apos;s News Desk
           </h2>
-          <p className="text-[#A0A0A0] text-lg">
+          <p className="text-[var(--color-muted)] text-lg">
             Curated headlines from trusted sources around the world
           </p>
         </div>
@@ -207,13 +207,13 @@ export default function HomePage() {
               className="mb-12 page-content"
             >
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-white flex items-center gap-3 border-l-4 border-[#C8102E] pl-4">
+                <h3 className="text-2xl font-bold text-[var(--color-text)] flex items-center gap-3 border-l-4 border-[var(--color-accent)] pl-4">
                   <TrendingUp className="h-6 w-6" style={{ color: section.color }} />
                   {section.title}
                 </h3>
                 <Link
                   href={`/dashboard?category=${section.id}`}
-                  className="inline-flex items-center gap-2 text-[#C8102E] hover:text-[#FF1744] transition-colors"
+                  className="inline-flex items-center gap-2 text-[var(--color-accent)] hover:text-[#FF1744] transition-colors"
                 >
                   &quot;See more &quot; →
                   <ArrowRight className="h-4 w-4" />
@@ -228,20 +228,20 @@ export default function HomePage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 + articleIndex * 0.05 }}
-                    className="news-card bg-[#1A1A1A] border border-[#2A2A2A] p-6 hover:border-[#C8102E]"
+                    className="news-card bg-[var(--color-card-bg)] border border-[var(--color-border)] p-6 hover:border-[var(--color-accent)]"
                   >
                     <div className="mb-3">
-                      <div className="flex items-center gap-2 text-xs text-[#A0A0A0] mb-3">
+                      <div className="flex items-center gap-2 text-xs text-[var(--color-muted)] mb-3">
                         <span className="px-2 py-1 rounded-full text-xs font-medium" style={{ backgroundColor: section.color + '20', color: section.color }}>
                           {article.source}
                         </span>
                         <span className="text-[#707070]">•</span>
                         <span>{article.time}</span>
                       </div>
-                      <h4 className="font-semibold text-white mb-2 line-clamp-2">
+                      <h4 className="font-semibold text-[var(--color-text)] mb-2 line-clamp-2">
                         {article.title}
                       </h4>
-                      <p className="text-sm text-[#A0A0A0] line-clamp-3">
+                      <p className="text-sm text-[var(--color-muted)] line-clamp-3">
                         {article.description}
                       </p>
                     </div>

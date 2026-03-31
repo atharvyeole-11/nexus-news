@@ -20,6 +20,7 @@ export default function ShortsPage() {
   const fetchShorts = async () => {
     try {
       setLoading(true);
+      setError(null);
       const response = await fetch("/api/shorts");
       if (!response.ok) {
         throw new Error("Failed to fetch shorts");
@@ -27,7 +28,10 @@ export default function ShortsPage() {
       const data = await response.json();
       setShorts(data.shorts || []);
     } catch (err) {
+      console.error("Shorts fetch error:", err);
       setError(err.message);
+      // Set empty array to prevent crashes
+      setShorts([]);
     } finally {
       setLoading(false);
     }

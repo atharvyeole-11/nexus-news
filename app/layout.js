@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { LanguageDirectionWrapper } from "@/components/LanguageDirectionWrapper";
 import { BottomNav } from "@/components/BottomNav";
+import { ThemeProvider } from "@/lib/ThemeContext";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -25,11 +26,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
       <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased">
-        <Navbar />
-        <main>
-          <LanguageDirectionWrapper>{children}</LanguageDirectionWrapper>
-        </main>
-        <BottomNav />
+        <ThemeProvider>
+          <Navbar />
+          <main>
+            <LanguageDirectionWrapper>{children}</LanguageDirectionWrapper>
+          </main>
+          <BottomNav />
+        </ThemeProvider>
       </body>
     </html>
   );
