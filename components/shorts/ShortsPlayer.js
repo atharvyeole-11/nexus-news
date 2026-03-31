@@ -75,52 +75,60 @@ export function ShortsPlayer({ short, isActive, onNext, onPrevious }) {
   };
 
   return (
-    <div ref={containerRef} className="relative h-full w-full bg-black">
-      <div className="absolute inset-0">
+    <div ref={containerRef} className="relative h-full w-full">
+      {/* YouTube Iframe */}
+      <div className="relative h-full w-full bg-black">
         <iframe
           ref={iframeRef}
           src={`https://www.youtube.com/embed/${short.videoId}?autoplay=0&mute=1&enablejsapi=1&loop=1&playlist=${short.videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3`}
-          className="h-full w-full object-cover"
+          className="h-full w-full border-0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          style={{ pointerEvents: isActive ? "auto" : "none" }}
         />
         
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-      </div>
-
-      <div className="absolute top-0 left-0 right-0 h-1 bg-zinc-800/50">
-        <div className="h-full bg-amber-400 transition-all duration-300" style={{ width: "0%" }} />
-      </div>
-
-      <button
-        onClick={toggleMute}
-        className="absolute right-4 top-4 rounded-full bg-black/50 p-2 text-white transition-opacity hover:bg-black-70"
-      >
-        {isMuted ? (
-          <VolumeX className="h-5 w-5" />
-        ) : (
-          <Volume2 className="h-5 w-5" />
-        )}
-      </button>
-
-      <div className="absolute bottom-20 left-4 right-16 text-white">
-        <h2 className="mb-2 text-lg font-semibold leading-tight">
-          {short.title}
-        </h2>
-        <div className="flex items-center gap-3 text-sm text-zinc-300">
-          <span className="font-medium">{short.channelName}</span>
-          <span>•</span>
-          <span>{formatViewCount(short.viewCount)}</span>
-          {short.duration > 0 && (
-            <>
-              <span>•</span>
+        {/* Overlay Controls */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4">
+          <div className="flex items-center justify-between">
+            {/* Left: Title & Channel */}
+            <div className="flex-1">
+              <h3 className="text-white font-semibold text-sm mb-1 line-clamp-1">
+                {short.title}
+              </h3>
+              <p className="text-[#A0A0A0] text-xs flex items-center gap-2">
+                <span className="px-2 py-1 rounded-full bg-[#C8102E]/20 text-[#C8102E] text-xs">
+                  {short.channelName}
+                </span>
+                <span>•</span>
+                <span>{new Date(short.publishedAt).toLocaleDateString()}</span>
+              </p>
               <span>{formatDuration(short.duration)}</span>
-            </>
-          )}
+            </div>
+
+            {/* Right: Mute Button */}
+            <button
+              onClick={toggleMute}
+              className="nav-link bg-black/50 backdrop-blur-sm p-2 rounded-full"
+              aria-label={isMuted ? "Unmute" : "Mute"}
+            >
+              {isMuted ? (
+                <VolumeX className="h-5 w-5 text-white" />
+              ) : (
+                <Volume2 className="h-5 w-5 text-white" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/30">
+          <div 
+            className="h-full bg-[#C8102E] transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
         </div>
       </div>
 
+      {/* Sidebar */}
       <div className="absolute bottom-20 right-4">
         <ShortsSidebar
           short={short}

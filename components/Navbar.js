@@ -54,73 +54,87 @@ export function Navbar() {
   const tr = (key) => tFor(language, key);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-zinc-950/90 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link
-          href="/"
-          className="font-heading flex items-center gap-2 text-lg font-bold tracking-tight text-zinc-100"
-        >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/15 text-amber-400">
-            <Newspaper className="h-4 w-4" aria-hidden />
-          </span>
-          Nexus News
-        </Link>
+    <>
+      {/* Breaking News Ticker */}
+      <div className="bg-[#C8102E] text-white py-2 overflow-hidden">
+        <div className="flex items-center gap-4">
+          <div className="breaking-badge px-3 py-1 text-xs font-bold bg-[#FF1744] rounded-full">
+            BREAKING
+          </div>
+          <div className="ticker-text whitespace-nowrap">
+            Global markets surge as investors show renewed confidence in economic recovery • Climate summit reaches historic agreement • Tech giants report record quarterly earnings
+          </div>
+        </div>
+      </div>
 
-        <nav className="flex items-center gap-1 sm:gap-2">
+      <header className="sticky top-0 z-50 bg-[#0F0F0F] border-b border-[#2A2A2A] backdrop-blur-md">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
           <Link
-            href="/shorts"
-            className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-zinc-300 transition hover:bg-zinc-800/80 hover:text-amber-400"
+            href="/"
+            className="logo font-heading flex items-center gap-2 text-lg font-bold tracking-tight text-white"
           >
-            <Play className="h-4 w-4" />
-            <span className="hidden sm:inline">Shorts</span>
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#C8102E] text-white">
+              <Newspaper className="h-4 w-4" aria-hidden />
+            </span>
+            <span className="text-white">Nexus</span>
+            <span className="text-[#C8102E]">News</span>
           </Link>
 
-          <select
-            value={language}
-            onChange={(e) => {
-              const next = e.target.value;
-              setLanguage(next);
-              setStoredLanguage(next);
-            }}
-            className="rounded-lg border border-zinc-800 bg-zinc-950 px-2 py-1.5 text-xs text-zinc-300 outline-none transition focus:border-amber-500/50 sm:text-sm"
-            aria-label="Language"
-          >
-            {LANGUAGES.map((l) => (
-              <option key={l.code} value={l.code}>
-                {l.flag} {l.nativeLabel}
-              </option>
-            ))}
-          </select>
-
-          {user ? (
-            <>
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-zinc-300 transition hover:bg-zinc-800/80 hover:text-amber-400"
-              >
-                <LayoutDashboard className="h-4 w-4" />
-                <span className="hidden sm:inline">{tr("dashboard")}</span>
-              </Link>
-              <button
-                type="button"
-                onClick={handleSignOut}
-                className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-zinc-400 transition hover:bg-zinc-800/80 hover:text-zinc-100"
-              >
-                <LogOut className="h-4 w-4" />
-                <span className="hidden sm:inline">{tr("signOut")}</span>
-              </button>
-            </>
-          ) : (
+          <nav className="flex items-center gap-1 sm:gap-2">
             <Link
-              href="/login"
-              className="btn-primary gap-2 !py-2 !text-sm"
+              href="/shorts"
+              className="nav-link inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-[#FFFFFF] transition"
             >
-              <LogIn className="h-4 w-4" />
-              Sign in
+              <Play className="h-4 w-4" />
+              <span className="hidden sm:inline">Shorts</span>
             </Link>
-          )}
-        </nav>
-      </div>
-    </header>
+
+            <select
+              value={language}
+              onChange={(e) => {
+                const next = e.target.value;
+                setLanguage(next);
+                setStoredLanguage(next);
+              }}
+              className="rounded-lg border border-[#2A2A2A] bg-[#1A1A1A] px-2 py-1.5 text-xs text-[#FFFFFF] outline-none transition focus:border-[#C8102E] sm:text-sm"
+              aria-label="Language"
+            >
+              {LANGUAGES.map((l) => (
+                <option key={l.code} value={l.code}>
+                  {l.flag} {l.nativeLabel}
+                </option>
+              ))}
+            </select>
+
+            {user ? (
+              <>
+                <Link
+                  href="/dashboard"
+                  className="nav-link inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-[#FFFFFF] transition"
+                >
+                  <LayoutDashboard className="h-4 w-4" />
+                  <span className="hidden sm:inline">Dashboard</span>
+                </Link>
+                <button
+                  onClick={handleSignOut}
+                  className="nav-link inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-[#FFFFFF] transition"
+                >
+                  <LogOut className="h-4 w-4" />
+                  <span className="hidden sm:inline">Sign Out</span>
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                className="btn-primary inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-[#FFFFFF] transition"
+              >
+                <LogIn className="h-4 w-4" />
+                <span className="hidden sm:inline">Sign In</span>
+              </Link>
+            )}
+          </nav>
+        </div>
+      </header>
+    </>
   );
 }

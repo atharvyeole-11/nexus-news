@@ -2,6 +2,7 @@ import { Syne, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { LanguageDirectionWrapper } from "@/components/LanguageDirectionWrapper";
+import { BottomNav } from "@/components/BottomNav";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
         <main>
           <LanguageDirectionWrapper>{children}</LanguageDirectionWrapper>
         </main>
+        <BottomNav />
       </body>
     </html>
   );

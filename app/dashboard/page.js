@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { NewsCard } from "@/components/NewsCard";
 import { NovaFloatingPanel } from "@/components/NovaFloatingPanel";
-import { Loader2 } from "lucide-react";
+import { Loader2, Crown, Calendar } from "lucide-react";
 import { normalizeSubscriptionTier } from "@/lib/subscription";
 import {
   LANGUAGE_EVENT,
@@ -179,6 +179,39 @@ export default function DashboardPage() {
         <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h1 className="font-heading text-3xl font-bold text-white">{tr("desk")}</h1>
+            <div className="mt-2 flex items-center gap-3">
+              <div className={`
+                rounded-lg border px-3 py-2 text-sm font-medium
+                ${subscriptionTier === "Free" 
+                  ? "border-zinc-700 bg-zinc-800 text-zinc-300" 
+                  : subscriptionTier === "Basic" 
+                    ? "border-blue-500/30 bg-blue-500/10 text-blue-300" 
+                    : "border-amber-500/30 bg-amber-500/10 text-amber-300"
+                }
+              `}>
+                <div className="flex items-center gap-2">
+                  {subscriptionTier !== "Free" && (
+                    <Crown className="h-4 w-4" />
+                  )}
+                  <span>
+                    {subscriptionTier === "Free" ? "Free" : subscriptionTier === "Basic" ? "Basic" : "Premium"}
+                  </span>
+                </div>
+                {subscriptionTier !== "Free" && (
+                  <div className="text-xs opacity-75">
+                    Expires: {new Date(user.subscription_end).toLocaleDateString()}
+                  </div>
+                )}
+              </div>
+              {subscriptionTier === "Free" && (
+                <button
+                  onClick={() => router.push("/subscribe")}
+                  className="ml-3 rounded-lg bg-amber-500 px-3 py-2 text-sm font-medium text-white hover:bg-amber-600 transition-colors"
+                >
+                  Upgrade
+                </button>
+              )}
+            </div>
             <p className="mt-1 text-sm text-zinc-500">
               {tr("signedInAs")}{" "}
               <span className="text-zinc-300">
