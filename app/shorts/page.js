@@ -61,10 +61,10 @@ export default function ShortsPage() {
 
   if (loading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-zinc-950">
+      <div className="flex h-screen items-center justify-center bg-[var(--color-bg)]">
         <div className="flex flex-col items-center gap-4">
-          <Loader2 className="h-8 w-8 animate-spin text-amber-400" />
-          <p className="text-zinc-400">Loading news shorts...</p>
+          <Loader2 className="h-8 w-8 animate-spin text-[var(--color-accent)]" />
+          <p className="text-[var(--color-muted)]">Loading news shorts...</p>
         </div>
       </div>
     );
@@ -72,15 +72,16 @@ export default function ShortsPage() {
 
   if (error) {
     return (
-      <div className="flex h-screen items-center justify-center bg-zinc-950">
+      <div className="flex h-screen items-center justify-center bg-[var(--color-bg)]">
         <div className="flex flex-col items-center gap-4 px-4 text-center">
-          <div className="rounded-full bg-red-500/10 p-4">
-            <Play className="h-6 w-6 text-red-400" />
+          <div className="rounded-full bg-[var(--color-surface)] p-4">
+            <Play className="h-6 w-6 text-[var(--color-muted)]" />
           </div>
-          <p className="text-zinc-400">Failed to load shorts: {error}</p>
+          <p className="text-[var(--color-text)]">Failed to load shorts</p>
+          <p className="text-[var(--color-muted)] text-sm">{error}</p>
           <button
             onClick={fetchShorts}
-            className="rounded-lg bg-amber-500/10 px-4 py-2 text-amber-400 hover:bg-amber-500/20"
+            className="btn-primary gap-2 px-6 py-3 text-base"
           >
             Try Again
           </button>
@@ -91,19 +92,22 @@ export default function ShortsPage() {
 
   if (shorts.length === 0) {
     return (
-      <div className="flex h-screen items-center justify-center bg-[#0F0F0F]">
+      <div className="flex h-screen items-center justify-center bg-[var(--color-bg)]">
         <div className="flex flex-col items-center gap-4 px-4 text-center">
-          <div className="rounded-full bg-zinc-800 p-4">
-            <Loader2 className="h-6 w-6 text-zinc-400" />
+          <div className="rounded-full bg-[var(--color-surface)] p-4">
+            <Play className="h-6 w-6 text-[var(--color-muted)]" />
           </div>
-          <p className="text-[#A0A0A0]">No news shorts available at the moment</p>
+          <p className="text-[var(--color-text)]">No news shorts available at the moment</p>
+          <p className="text-[var(--color-muted)] text-sm">
+            Check back later for the latest news shorts
+          </p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="newsroom-grain min-h-[calc(100vh-3.5rem)] bg-[#0F0F0F]">
+    <div className="newsroom-grain min-h-[calc(100vh-3.5rem)] bg-[var(--color-bg)]">
       <div className="relative h-screen overflow-hidden">
         {/* Shorts Container */}
         <div className="h-full">
