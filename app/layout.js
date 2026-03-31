@@ -2,7 +2,7 @@ import { Syne, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { LanguageDirectionWrapper } from "@/components/LanguageDirectionWrapper";
-import { BottomNav } from "@/components/BottomNav";
+import { FloatingNav } from "@/components/FloatingNav";
 import { ThemeProvider } from "@/lib/ThemeContext";
 
 const syne = Syne({
@@ -25,13 +25,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
-      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased">
+      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased pb-20 md:pb-24">
         <ThemeProvider>
           <Navbar />
           <main>
             <LanguageDirectionWrapper>{children}</LanguageDirectionWrapper>
           </main>
-          <BottomNav />
+          <FloatingNav />
         </ThemeProvider>
       </body>
     </html>

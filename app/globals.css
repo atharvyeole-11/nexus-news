@@ -267,6 +267,64 @@ body {
   animation: iconSwap 0.4s ease;
 }
 
+/* Floating Navigation */
+.floating-nav {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(15, 15, 15, 0.85);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5),
+              inset 0 1px 0 rgba(255,255,255,0.05);
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+[data-theme='light'] .floating-nav {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  position: relative;
+}
+
+.nav-btn:hover {
+  transform: translateY(-4px) scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .floating-nav {
+    bottom: 16px;
+    padding: 8px 16px;
+    gap: 6px;
+  }
+  
+  .nav-btn {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  
+  .nav-btn[class*="w-[52px]"] {
+    width: 48px !important;
+    height: 48px !important;
+  }
+}
+
 .btn-primary {
   @apply inline-flex items-center justify-center rounded-lg bg-[#f59e0b] px-4 py-2.5 text-sm font-semibold text-zinc-950 transition hover:bg-amber-400 active:scale-[0.99];
 }
